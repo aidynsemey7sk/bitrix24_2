@@ -1,25 +1,62 @@
+from Btx import Btx
+
 my_js = {
-    "title": "title",
+    "title": "New Deal 1",
     "description": "Some description",
     "client": {
-        "name": "Jon",
-        "surname": "Karter",
-        "phone": "+77777777777",
-        "adress": "st. Mira, 287, Moscow"
+        "name": "Aika",
+        "surname": "Zaika",
+        "phone": "+70550130100",
+        "address": "st. Mira, 287, Moscow"
     },
     "products": ["Candy", "Carrot", "Potato"],
-    "delivery_adress": "st. Mira, 211, Ekaterinburg",
+    "delivery_address": "st. Mira, 211, Ekaterinburg",
     "delivery_date": "2021-01-01:16:00",
-    "delivery_code": "#232nkF3fAdn"
+    "delivery_code": "#sda*&gsabhd126"
 }
 
-from bitrix24 import Bitrix24, BitrixError
+btx = Btx('https://b24-hzzdt4.bitrix24.kz/rest/1/wknstxkqfqabscgn/', my_js)
 
-bx24 = Bitrix24('https://b24-hzzdt4.bitrix24.kz/rest/1/23uqh8y0vqitp5pg/')
+my_btx_url = 'https://b24-hzzdt4.bitrix24.kz/rest/1/wknstxkqfqabscgn/'
 
-a = bx24.callMethod('crm.deal.list',
-                order={'STAGE_ID': 'ASC'},
-                filter={'>PROBABILITY': 50},
-                select=['ID', 'TITLE', 'STAGE_ID', 'PROBABILITY'])
+# print(btx.get_deal_list())
+# print(btx.add_client())
+# print(btx.get_client())
+# print(btx.add_deal_client())
+# print(btx.check_contact_for_b24())
+# print(btx.add_deal())
+# print(btx.get_client_id())
+# print(btx.get_deal_id('#sda*&gsabhd126'))
+# print(btx.is_duplicate_deal_item())
+# print(btx.add_fields())
+print(btx.add_deal_custom_fields())
 
-print(a)
+
+def main(url, js):
+    bitrix24 = Btx(url, js)
+    if bitrix24.check_contact_for_b24():
+        # Проверяем есть ли такой клиент
+        print('Клиент есть в системе')
+        pass
+    else:
+        # Добавляем клиента в систему
+        print('Клиента нету в системе')
+        bitrix24.add_client()
+        # Создаем сделку
+        bitrix24.add_deal()
+        # получаем id клиента и id сделки
+        client_id = bitrix24.get_client_id()
+        deal_id = bitrix24.get_deal_id()
+        # Связываем сделку с клиентом
+        bitrix24.add_deal_client(client_id, deal_id)
+
+
+
+    # получаем id клиента и id сделки
+    client_id = bitrix24.get_client_id()
+    deal_id = bitrix24.get_deal_id()
+
+
+
+
+# main(my_btx_url, my_js)
