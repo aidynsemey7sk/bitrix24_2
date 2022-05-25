@@ -29,7 +29,8 @@ my_btx_url = 'https://b24-hzzdt4.bitrix24.kz/rest/1/wknstxkqfqabscgn/'
 # print(btx.get_deal_id('#sda*&gsabhd126'))
 # print(btx.is_duplicate_deal_item())
 # print(btx.add_fields())
-print(btx.add_deal_custom_fields())
+# print(btx.add_deal_custom_fields())
+print(btx.get_all_deal_fields())
 
 
 def main(url, js):

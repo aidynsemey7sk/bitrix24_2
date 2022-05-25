@@ -143,5 +143,10 @@ class Btx:
         )
         return deal_id[0]
 
+    def get_all_deal_fields(self):
+        all_fields = self.bx24.callMethod(
+            'crm.deal.fields'
+        )
+        return all_fields
 
 
